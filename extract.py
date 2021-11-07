@@ -20,13 +20,12 @@ from models import CloseApproach, NearEarthObject
 
 
 # TODO: set default to arg parse 'args.neofile'
-def load_neos(neo_csv_path: pathlib.Path) -> list:
+def load_neos(neo_csv_path):
     """Read near-Earth object information from a CSV file.
 
     :param neo_csv_path: A path to a CSV file containing data about near-Earth objects.
     :return: A collection of `NearEarthObject`s.
     """
-    # TODO: Load NEO data from the given CSV file. - done by import parser
     neos_list = []
     with neo_csv_path.open("r") as infile:
         reader = csv.DictReader(infile)
@@ -39,13 +38,12 @@ def load_neos(neo_csv_path: pathlib.Path) -> list:
     return neos_list
 
 
-def load_approaches(cad_json_path: pathlib.Path) -> list:
+def load_approaches(cad_json_path):
     """Read close approach data from a JSON file.
 
     :param cad_json_path: A path to a JSON file containing data about close approaches.
     :return: A collection of `CloseApproach`es.
     """
-    # TODO: Load close approach data from the given JSON file.
     close_approach_list = []
     with cad_json_path.open('r') as infile:
         contents = json.load(infile)
@@ -54,8 +52,6 @@ def load_approaches(cad_json_path: pathlib.Path) -> list:
             time = approaches[contents['fields'].index('cd')]
             distance = approaches[contents['fields'].index('dist')]
             velocity = approaches[contents['fields'].index('v_rel')]
-            # TODO: Check if no need to indicate NearEarthObject as the first parameter
-            # TODO: How to pass agr value to an object that has _,
             close_approach_list.append(
                 CloseApproach(time, designation, distance, velocity))
     return close_approach_list
