@@ -32,9 +32,7 @@ def load_neos(neo_csv_path):
             name = row["name"]
             hazardous = row["pha"]
             diameter = row["diameter"]
-            neos_list.append(
-                NearEarthObject(designation, name, hazardous, diameter)
-            )
+            neos_list.append(NearEarthObject(designation, name, hazardous, diameter))
     return neos_list
 
 

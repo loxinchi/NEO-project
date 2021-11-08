@@ -52,9 +52,7 @@ class NearEarthObject:
     def fullname(self):
         """Return a representation of the full name of this NEO."""
         full_name = (
-            f"{self.designation} ({self.name})"
-            if self.name
-            else f"{self.designation}"
+            f"{self.designation} ({self.name})" if self.name else f"{self.designation}"
         )
         return full_name
 
@@ -99,7 +97,9 @@ class CloseApproach:
     `NEODatabase` constructor.
     """
 
-    def __init__(self, time, designation=None, distance="0.0", velocity="0.0", neo=None):
+    def __init__(
+        self, time, designation=None, distance="0.0", velocity="0.0", neo=None
+    ):
         """Create a new `CloseApproach`.
 
         :param time: The date and time (in UTC) of a NEO's closest approach to Earth.

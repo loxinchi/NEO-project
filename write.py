@@ -34,8 +34,7 @@ def write_to_csv(results, filename):
         "potentially_hazardous",
     )
     result_list = [
-        {**approach.serialize(), **approach.neo.serialize()}
-        for approach in results
+        {**approach.serialize(), **approach.neo.serialize()} for approach in results
     ]
     with open(filename, "w") as outfile:
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)
