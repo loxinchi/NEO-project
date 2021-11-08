@@ -131,7 +131,6 @@ class CloseApproach:
         formatted string that can be used in human-readable representations and
         in serialization to CSV and JSON files.
         """
-
         return f"{datetime_to_str(self.time)}"
 
     def __str__(self):

@@ -71,41 +71,52 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """Return `repr(self)`, a computer-readable string representation of AttributeFilter object."""
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 
 class DateFilter(AttributeFilter):
     """Filter the close approach by the given date value and comparison on the command line."""
+
     @classmethod
     def get(cls, approach):
+        """Get time attribute of interest from the supplied `CloseApproach`."""
         return approach.time.date()
 
 
 class DistanceFilter(AttributeFilter):
     """Filter the close approach by the given distance value and comparison on the command line."""
+
     @classmethod
     def get(cls, approach):
+        """Get distance attribute of interest from the supplied `CloseApproach`."""
         return approach.distance
 
 
 class DiameterFilter(AttributeFilter):
     """Filter the neo diameter by the given diameter value and comparison on the command line."""
+
     @classmethod
     def get(cls, approach):
+        """Get diameter from neo attribute of interest from the supplied `CloseApproach`."""
         return approach.neo.diameter
 
 
 class VelocityFilter(AttributeFilter):
     """Filter the close approach by the given velocity value and comparison on the command line."""
+
     @classmethod
     def get(cls, approach):
+        """Get velocity attribute of interest from the supplied `CloseApproach`."""
         return approach.velocity
 
 
 class HazardousFilter(AttributeFilter):
     """Filter the close approach by the given hazardous value and comparison on the command line."""
+
     @classmethod
     def get(cls, approach):
+        """Get hazardous from neo attribute of interest from the supplied `CloseApproach`."""
         return approach.neo.hazardous
 
 

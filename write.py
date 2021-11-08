@@ -61,4 +61,4 @@ def write_to_json(results, filename):
         approach_data["neo"] = result.neo.serialize()
         result_dict.append(approach_data)
     with open(filename, "w") as outfile:
-        json.dump(result_dict, outfile, indent=2)
+        json.dump(result_dict, outfile, sort_keys=True, indent=2)
