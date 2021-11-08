@@ -17,8 +17,6 @@ quirks of the data set, such as missing names and unknown diameters.
 
 You'll edit this file in Task 1.
 """
-from datetime import datetime
-
 from helpers import cd_to_datetime, datetime_to_str
 
 
@@ -35,8 +33,6 @@ class NearEarthObject:
     `NEODatabase` constructor.
     """
 
-    # TODO: How can you, and should you, change the arguments to this constructor?
-    # If you make changes, be sure to update the comments in this file.
     def __init__(self, designation, name, hazardous=False, diameter=float("nan")):
         """Create a new `NearEarthObject`.
 
@@ -45,40 +41,48 @@ class NearEarthObject:
         :param diameter: The diameter of a NEO, in kilometers, .
         :param hazardous: Whether or not this NEO is potentially hazardous.
         """
-        # onto attributes named `designation`, `name`, `diameter`, and `hazardous`.
-        # You should coerce these values to their appropriate data type and
-        # handle any edge cases, such as a empty name being represented by `None`
-        # and a missing diameter being represented by `float('nan')`.
         self.designation = designation
         self.name = name if name else None
         self.diameter = float(diameter) if diameter else float("nan")
-        self.hazardous = True if hazardous == 'Y' else False
+        self.hazardous = bool(hazardous == "Y")
         # Create an empty initial collection of linked approaches.
         self.approaches = []
 
     @property
     def fullname(self):
         """Return a representation of the full name of this NEO."""
-        full_name = (f"{self.designation} ({self.name})" if self.name else f"{self.designation}")
+        full_name = (
+            f"{self.designation} ({self.name})"
+            if self.name
+            else f"{self.designation}"
+        )
         return full_name
 
     def __str__(self):
         """Return `str(self)`."""
-        return (f"NEO {self.fullname} has a diameter of {self.diameter} km and {'is' if self.hazardous else 'is not'} "
-                f"potentially hazardous.In addition, include {len(self.approaches)} approaches metadata.")
+        return (
+            f"NEO {self.fullname} has a diameter of {self.diameter} km "
+            f"and {'is' if self.hazardous else 'is not'} "
+            f"potentially hazardous.In addition, "
+            f"include {len(self.approaches)} approaches metadata."
+        )
 
     def __repr__(self):
         """Return `repr(self)`, a computer-readable string representation of this object."""
-        return (f"NearEarthObject(designation={self.designation!r}, name={self.name!r}, "
-                f"diameter={self.diameter:.3f}, hazardous={self.hazardous!r}, "
-                f"include {len(self.approaches)} approaches metadata.")
+        return (
+            f"NearEarthObject(designation={self.designation!r}, name={self.name!r}, "
+            f"diameter={self.diameter:.3f}, hazardous={self.hazardous!r}, "
+            f"include {len(self.approaches)} approaches metadata."
+        )
 
     def serialize(self):
         """Return a dictionary containing relevant attributes serialization."""
-        return {'designation': self.designation,
-                'name': self.name if self.name is not None else '',
-                'diameter_km': self.diameter,
-                'potentially_hazardous': self.hazardous}
+        return {
+            "designation": self.designation,
+            "name": self.name if self.name is not None else "",
+            "diameter_km": self.diameter,
+            "potentially_hazardous": self.hazardous,
+        }
 
 
 class CloseApproach:
@@ -95,7 +99,7 @@ class CloseApproach:
     `NEODatabase` constructor.
     """
 
-    def __init__(self, time, designation= None, distance="0.0", velocity="0.0", neo=None):
+    def __init__(self, time, designation=None, distance="0.0", velocity="0.0", neo=None):
         """Create a new `CloseApproach`.
 
         :param time: The date and time (in UTC) of a NEO's closest approach to Earth.
@@ -111,6 +115,7 @@ class CloseApproach:
 
     @property
     def designation(self):
+        """Return designation value of a neo."""
         return self._designation
 
     @property
@@ -148,6 +153,8 @@ class CloseApproach:
 
     def serialize(self):
         """Return a dictionary containing relevant attributes serialization."""
-        return {'datetime_utc': datetime_to_str(self.time),
-                'distance_au': self.distance,
-                'velocity_km_s': self.velocity}
+        return {
+            "datetime_utc": datetime_to_str(self.time),
+            "distance_au": self.distance,
+            "velocity_km_s": self.velocity,
+        }

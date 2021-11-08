@@ -75,46 +75,51 @@ class AttributeFilter:
 
 
 class DateFilter(AttributeFilter):
+    """Filter the close approach by the given date value and comparison on the command line."""
     @classmethod
     def get(cls, approach):
         return approach.time.date()
 
 
 class DistanceFilter(AttributeFilter):
+    """Filter the close approach by the given distance value and comparison on the command line."""
     @classmethod
     def get(cls, approach):
         return approach.distance
 
 
 class DiameterFilter(AttributeFilter):
+    """Filter the neo diameter by the given diameter value and comparison on the command line."""
     @classmethod
     def get(cls, approach):
         return approach.neo.diameter
 
 
 class VelocityFilter(AttributeFilter):
+    """Filter the close approach by the given velocity value and comparison on the command line."""
     @classmethod
     def get(cls, approach):
         return approach.velocity
 
 
 class HazardousFilter(AttributeFilter):
+    """Filter the close approach by the given hazardous value and comparison on the command line."""
     @classmethod
     def get(cls, approach):
         return approach.neo.hazardous
 
 
 def create_filters(
-        date=None,
-        start_date=None,
-        end_date=None,
-        distance_min=None,
-        distance_max=None,
-        velocity_min=None,
-        velocity_max=None,
-        diameter_min=None,
-        diameter_max=None,
-        hazardous=None,
+    date=None,
+    start_date=None,
+    end_date=None,
+    distance_min=None,
+    distance_max=None,
+    velocity_min=None,
+    velocity_max=None,
+    diameter_min=None,
+    diameter_max=None,
+    hazardous=None,
 ):
     """Create a collection of filters from user-specified criteria.
 
@@ -191,5 +196,4 @@ def limit(iterator, n=None):
     """
     if n is None or n == 0:
         return islice(iterator, None)
-    else:
-        return islice(iterator, n)
+    return islice(iterator, n)

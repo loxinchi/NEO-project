@@ -33,8 +33,11 @@ def write_to_csv(results, filename):
         "diameter_km",
         "potentially_hazardous",
     )
-    result_list = [{**approach.serialize(), **approach.neo.serialize()} for approach in results]
-    with open(filename, 'w') as outfile:
+    result_list = [
+        {**approach.serialize(), **approach.neo.serialize()}
+        for approach in results
+    ]
+    with open(filename, "w") as outfile:
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)
         writer.writeheader()
         for result in result_list:
@@ -57,5 +60,5 @@ def write_to_json(results, filename):
         approach_data = result.serialize()
         approach_data["neo"] = result.neo.serialize()
         result_dict.append(approach_data)
-    with open(filename, 'w') as outfile:
+    with open(filename, "w") as outfile:
         json.dump(result_dict, outfile, indent=2)

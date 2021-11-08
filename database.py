@@ -51,8 +51,11 @@ class NEODatabase:
             # append neo to neo.approaches
             neo.approaches.append(approach)
 
-        self.neos_by_name = {key.replace(key, value.name): value for key, value in self.neos_by_desination.items() if
-                             value.name is not None}
+        self.neos_by_name = {
+            key.replace(key, value.name): value
+            for key, value in self.neos_by_desination.items()
+            if value.name is not None
+        }
 
     def get_neo_by_designation(self, designation):
         """Find and return an NEO by its primary designation.

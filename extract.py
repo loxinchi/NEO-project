@@ -14,12 +14,10 @@ You'll edit this file in Task 2.
 """
 import csv
 import json
-import pathlib
 
 from models import CloseApproach, NearEarthObject
 
 
-# TODO: set default to arg parse 'args.neofile'
 def load_neos(neo_csv_path):
     """Read near-Earth object information from a CSV file.
 
@@ -30,11 +28,13 @@ def load_neos(neo_csv_path):
     with neo_csv_path.open("r") as infile:
         reader = csv.DictReader(infile)
         for row in reader:
-            designation = row['pdes']
-            name = row['name']
-            hazardous = row['pha']
-            diameter = row['diameter']
-            neos_list.append(NearEarthObject(designation, name, hazardous, diameter))
+            designation = row["pdes"]
+            name = row["name"]
+            hazardous = row["pha"]
+            diameter = row["diameter"]
+            neos_list.append(
+                NearEarthObject(designation, name, hazardous, diameter)
+            )
     return neos_list
 
 
@@ -45,13 +45,14 @@ def load_approaches(cad_json_path):
     :return: A collection of `CloseApproach`es.
     """
     close_approach_list = []
-    with cad_json_path.open('r') as infile:
+    with cad_json_path.open("r") as infile:
         contents = json.load(infile)
-        for approaches in contents['data']:
-            designation = approaches[contents['fields'].index('des')]
-            time = approaches[contents['fields'].index('cd')]
-            distance = approaches[contents['fields'].index('dist')]
-            velocity = approaches[contents['fields'].index('v_rel')]
+        for approaches in contents["data"]:
+            designation = approaches[contents["fields"].index("des")]
+            time = approaches[contents["fields"].index("cd")]
+            distance = approaches[contents["fields"].index("dist")]
+            velocity = approaches[contents["fields"].index("v_rel")]
             close_approach_list.append(
-                CloseApproach(time, designation, distance, velocity))
+                CloseApproach(time, designation, distance, velocity)
+            )
     return close_approach_list
